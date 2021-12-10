@@ -25,7 +25,10 @@ export default function TextInput ({ icon, ...otherProps }) {
                 size={16}
               />
             </View>
-            <View style={{flex: 1}}>
+
+            {/* flex: 1 below, as given in tutorial, messes up the textInput on Android device (but not in chrome emulator) */}
+            {/* <View style={{flex: 1}}>   */}
+            <View>
                 <RNTextInput
                     underlineColorAndroid='transparent'
                     placeholderTextColor='rgba(34, 62, 75, 0.7)'
