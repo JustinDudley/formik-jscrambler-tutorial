@@ -13,36 +13,36 @@ const TextInputComponent = forwardRef(({ icon, error, touched, ...otherProps }, 
 
     return (
         <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          height: 48,
-          borderRadius: 8,
-          borderColor: validationColor,
-          borderWidth: 2,
-          padding: 8
-        }}
-      >
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            height: 48,
+            borderRadius: 8,
+            borderColor: validationColor,
+            borderWidth: 2,
+            padding: 8
+          }}
+        >
           <View style={{padding: 8}}>
               <Icon 
                 name={icon} 
                 color={validationColor}
                 size={16}
               />
-            </View>
-
-            {/* flex: 1 below, as given in tutorial, messes up the textInput on Android device (but not in chrome emulator) */}
-            {/* <View style={{flex: 1}}>   */}
-            <View>
-                {/* <RNTextInput   // in tutorial */}
-                <TextInput
-                    underlineColorAndroid='transparent'
-                    placeholderTextColor='rgba(34, 62, 75, 0.7)'
-                    {...otherProps}
-                    ref={ref}  // added this when wrapping with forwardRef. It uses the second parameter, ref, above
-                />
-            </View>
           </View>
+
+          {/* flex: 1 below, as given in tutorial, messes up the textInput on Android device (but not in chrome emulator) */}
+          {/* <View style={{flex: 1}}>   */}
+          <View>
+              {/* <RNTextInput   // in tutorial */}
+              <TextInput
+                  underlineColorAndroid='transparent'
+                  placeholderTextColor='rgba(34, 62, 75, 0.7)'
+                  {...otherProps}
+                  ref={ref}  // added this when wrapping with forwardRef. It uses the second parameter, ref, above
+              />
+          </View>
+        </View>
     )
 })
 
