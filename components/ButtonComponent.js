@@ -1,7 +1,8 @@
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 
-export default function Button ({ label, onPress }) {
+// THIS COMPONENT IS CALLED Button IN THE ORIGINAL TUTORIAL. Very confusing, so I changed it:
+export default function ButtonComponent ({ label, onPress }) {
     return (
         <TouchableOpacity
             style={{

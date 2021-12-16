@@ -3,8 +3,8 @@ import { Text, View } from 'react-native';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import Button from '../components/Button';
-import TextInput from '../components/TextInput';
+import ButtonComponent from '../components/ButtonComponent';
+import TextInputComponent from '../components/TextInputComponent';
 
 export default function Login() {
 
@@ -57,7 +57,7 @@ export default function Login() {
                     width: '100%',
                 }}
             >
-                <TextInput
+                <TextInputComponent
                     icon='mail'
                     placeholder='Enter your email'
                     autoCapitalize='none'
@@ -79,7 +79,7 @@ export default function Login() {
                     width: '100%',
                 }}
             >
-                <TextInput
+                <TextInputComponent
                     ref={passwordRef}
                     icon='key'
                     placeholder='Enter your password'
@@ -96,7 +96,7 @@ export default function Login() {
                     onSubmitEditing={() => handleSubmit()}
                />
             </View>
-            <Button 
+            <ButtonComponent 
                 label='Login (the GO button)'
                 onPress={handleSubmit} // press goes into formik-land
             />
