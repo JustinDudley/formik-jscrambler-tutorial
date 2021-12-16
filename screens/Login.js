@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Text, View } from 'react-native';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 
 export default function Login() {
 
-    const {handleChange, handleSubmit, values } = useFormik({
+    const passwordRef = useRef(null)
+
+    const LoginSchema = Yup.object().shape({
+        email: Yup.string().email('Invalid email Yo').required('Required'),
+        password: Yup.string()
+            .min(2, 'password is too short')
+            .max(15, 'password is too long')
+            .required('Required')
+    })
+
+    const {
+        handleChange, 
+        handleSubmit,
+        handleBlur,
+        values,
+        errors,
+        touched,
+    } = useFormik({
+        validationSchema: LoginSchema, //bring in Yup functionality from block above
         initialValues: {email: 'tempYo', password: ''},
         onSubmit: values => 
         alert(`Email: ${values.email}, Password: ${values.password}`)
@@ -47,7 +66,11 @@ export default function Login() {
                     returnKeyType='next'
                     returnKeyLabel='next'
                     onChangeText={handleChange('email')}  //add user input to the property, defined above, named "email" [WAS email: 'tempYo', IS NOW email: 'whatever the user just typed']
-                />
+                    onBlur={handleBlur('email')}
+                    error={errors.email}
+                    touched={touched.email}
+                    onSubmitEditing={() => passwordRef.current?.focus()}
+               />
             </View>
             <View
                 style={{
@@ -57,6 +80,7 @@ export default function Login() {
                 }}
             >
                 <TextInput
+                    ref={passwordRef}
                     icon='key'
                     placeholder='Enter your password'
                     secureTextEntry
@@ -66,7 +90,11 @@ export default function Login() {
                     returnKeyType='go'
                     returnKeyLabel='go'
                     onChangeText={handleChange('password')} // as with 'email' in block above, this string called 'password' is passed somehow into the block at the top where formik was introduced
-                />
+                    onBlur={handleBlur('password')}
+                    error={errors.password}
+                    touched={touched.password}
+                    onSubmitEditing={() => handleSubmit()}
+               />
             </View>
             <Button 
                 label='Login (the GO button)'

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { TextInput as RNTextInput, View, StyleSheet } from 'react-native';
 
 import { Entypo as Icon } from '@expo/vector-icons';
 
-export default function TextInput ({ icon, ...otherProps }) {
-    const validationColor = '#223e4b';
+// Wrapping the whole TextInput with forwardRef forwards the ref to a child component
+const TextInput = forwardRef(({ icon, error, touched, ...otherProps }, ref) => {
+    const validationColor = !touched? 'black' : error? 'red' : 'green';
 
     return (
         <View
@@ -14,7 +15,7 @@ export default function TextInput ({ icon, ...otherProps }) {
           height: 48,
           borderRadius: 8,
           borderColor: validationColor,
-          borderWidth: StyleSheet.hairlineWidth,
+          borderWidth: 2,
           padding: 8
         }}
       >
@@ -33,8 +34,11 @@ export default function TextInput ({ icon, ...otherProps }) {
                     underlineColorAndroid='transparent'
                     placeholderTextColor='rgba(34, 62, 75, 0.7)'
                     {...otherProps}
+                    ref={ref}  // added this when wrapping with forwardRef. It uses the second parameter, ref, above
                 />
             </View>
           </View>
     )
-}
+})
+
+export default TextInput
